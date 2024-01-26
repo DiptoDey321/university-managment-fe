@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ReactElement, ReactNode } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
@@ -27,7 +27,6 @@ const Form = ({ children, submitHandler, defaultValues }: FormProps) => {
   };
   return (
     <FormProvider {...methods}>
-      // pass all methods into the context
       <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
     </FormProvider>
   );

@@ -1,3 +1,9 @@
-body {
+* {
   margin: 0px !important;
+  /* padding: 0px !important; */
+}
+.login-card {
+  background-color: rgb(3, 43, 43);
+  padding: 30px 20px;
+  border-radius: 10px;
 }
