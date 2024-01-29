@@ -21,12 +21,18 @@ export const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, headers }) => {
     try {
+      const modifiedHeaders = {
+        ...headers,
+
+        ACCESS_TOKEN:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiSm9obiBEb2UifQ.NpvuM7jIv6h7xQRKR8vJH9Endmvicf4CbZla5-alXrs",
+      };
       const result = await axios({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers,
+        headers: modifiedHeaders,
       });
       return { data: result.data };
     } catch (axiosError) {

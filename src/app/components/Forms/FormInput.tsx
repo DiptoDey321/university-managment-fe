@@ -12,6 +12,7 @@ interface IInput {
   id?: string;
   placeholder?: string;
   validation?: object;
+  labelColor?: string;
 }
 
 const FormInput = ({
@@ -23,12 +24,13 @@ const FormInput = ({
   placeholder,
   validation,
   label,
+  labelColor,
 }: IInput) => {
   const { handleSubmit, control } = useFormContext();
 
   return (
     <>
-      {label ? label : null}
+      <span style={{ color: `${labelColor}` }}> {label ? label : null}</span>
       <Controller
         control={control}
         name={name}

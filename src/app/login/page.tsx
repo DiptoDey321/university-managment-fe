@@ -1,12 +1,14 @@
 "use client";
 
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 import Image from "next/image";
 import React from "react";
 import loginImage from "../../assets/Mobile login-amico.svg";
 import Form from "../components/Forms/Form";
 import FormInput from "../components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
+import { useUserLoginMutation } from "@/redux/api/authApi";
+import { storeUserInfo } from "@/services/auth.service";
 
 type Formvalues = {
   id: string;
@@ -14,10 +16,15 @@ type Formvalues = {
 };
 
 function LoginPage() {
-  const onSubmit: SubmitHandler<Formvalues> = (data) => {
+  const [userLogin] = useUserLoginMutation();
+  const onSubmit: SubmitHandler<Formvalues> = async (data: any) => {
     try {
-      console.log(data);
-    } catch (error) {}
+      const response = await userLogin({ ...data }).unwrap();
+      storeUserInfo({ accessToken: response?.data?.accessToken });
+      // console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div>
@@ -43,7 +50,9 @@ function LoginPage() {
             }}
           >
             <div className="login-card">
-              <h1 style={{ color: "white" }}>Please login your account</h1>
+              <h2 style={{ color: "white", paddingBottom: "10px" }}>
+                Please login your account
+              </h2>
               <div className="">
                 <Form submitHandler={onSubmit}>
                   <FormInput
@@ -51,6 +60,7 @@ function LoginPage() {
                     type="text"
                     size="large"
                     label="User ID"
+                    labelColor="white"
                   />{" "}
                   <br /> <br />
                   <FormInput
@@ -58,6 +68,7 @@ function LoginPage() {
                     type="password"
                     size="large"
                     label="Enter password"
+                    labelColor="white"
                   />
                   <br /> <br />
                   <Button type="primary" htmlType="submit">
