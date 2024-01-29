@@ -21,7 +21,15 @@ function SideBar() {
         style={{ width: "200px !important" }}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <h2 style={{ color: "White" }}>Dipto-Academy</h2>
+          <h2
+            style={{
+              color: "White",
+              paddingTop: "30px",
+              paddingBottom: "20px",
+            }}
+          >
+            Dipto-Academy
+          </h2>
         </div>
 
         {/* Menu list  */}
